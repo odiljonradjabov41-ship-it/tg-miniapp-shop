@@ -35,6 +35,7 @@
     <!-- Dynamic Canvas Overlay Background -->
     <canvas id="neonCanvas"></canvas>
 
+    <!-- Header Section -->
     <header>
         <div class="logo">
             <span class="logo-icon">⚡</span> Cyber<span class="highlight">Nova</span>
@@ -44,11 +45,11 @@
             <a href="#calculator" data-i18n="nav_calc">Kalkulyator</a>
             <a href="#portfolio" data-i18n="nav_portfolio">Portfolio</a>
             <a href="#faq" data-i18n="nav_faq">FAQ</a>
-            <a href="https://t.me/CyberNovaPortfolioBot" class="nav-btn" target="_blank">🤖 Telegram Bot</a>
+            <a href="https://t.me/CyberNovaPortfolioBot" class="nav-btn" target="_blank" rel="noopener noreferrer">🤖 Telegram Bot</a>
         </nav>
 
-        <div class="header-controls" style="display: flex; align-items: center; gap: 12px;">
-            <!-- Dark / Light Mode Switcher Toggle Button -->
+        <div class="header-controls">
+            <!-- Dark / Light Mode Switcher -->
             <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme" title="Tungi / Kunduzgi rejim">
                 <span class="theme-icon">🌙</span>
             </button>
@@ -64,15 +65,15 @@
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="badge">🚀 Avtomatlashtirish & High-End IT Yechimlar</div>
-        <h1>Biznesingiz uchun Zamonaviy <br><span class="gradient-text">Telegram Bot va Mini-App</span>’lar</h1>
-        <p>Sotuv xarajatlarini 70% ga kamaytiring, CRM va to'lov tizimlarini integratsiya qiling hamda mijozlar oqimini 24/7 avtomatlashtiring.</p>
+        <div class="badge" data-i18n="hero_badge">🚀 Avtomatlashtirish & High-End IT Yechimlar</div>
+        <h1 data-i18n="hero_title">Biznesingiz uchun Zamonaviy <br><span class="gradient-text">Telegram Bot va Mini-App</span>’lar</h1>
+        <p data-i18n="hero_desc">Sotuv xarajatlarini 70% ga kamaytiring, CRM va to'lov tizimlarini integratsiya qiling hamda mijozlar oqimini 24/7 avtomatlashtiring.</p>
         
         <div class="hero-actions">
-            <a href="#calculator" class="btn btn-primary">
+            <a href="#calculator" class="btn btn-primary" data-i18n="hero_btn_calc">
                 🧮 Narxni Hisoblash
             </a>
-            <a href="https://t.me/O_Obidovich" class="btn btn-secondary" target="_blank">
+            <a href="https://t.me/O_Obidovich" class="btn btn-secondary" target="_blank" rel="noopener noreferrer" data-i18n="hero_btn_consult">
                 💬 Bepul Konsultatsiya
             </a>
         </div>
@@ -80,17 +81,17 @@
         <div class="stats-container">
             <div class="stat-item">
                 <h3>99.9%</h3>
-                <p>Server Barqarorligi</p>
+                <p data-i18n="stat_uptime">Server Barqarorligi</p>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
                 <h3>24/7</h3>
-                <p>Avtomatik Ishlov</p>
+                <p data-i18n="stat_auto">Avtomatik Ishlov</p>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
                 <h3>100%</h3>
-                <p>Kafolatlangan Sifat</p>
+                <p data-i18n="stat_quality">Kafolatlangan Sifat</p>
             </div>
         </div>
     </section>
@@ -99,47 +100,65 @@
     <section class="counters-section">
         <div class="counter-card">
             <h3 class="counter" data-target="50">0</h3>
-            <p>Bajarilgan Loyihalar</p>
+            <p data-i18n="counter_projects">Bajarilgan Loyihalar</p>
         </div>
         <div class="counter-card">
             <h3 class="counter" data-target="99">0</h3>
-            <p>Mijozlar Mamnuniyati (%)</p>
+            <p data-i18n="counter_satisfaction">Mijozlar Mamnuniyati (%)</p>
         </div>
         <div class="counter-card">
             <h3 class="counter" data-target="24">0</h3>
-            <p>Soat Texnik Yordam (7/24)</p>
+            <p data-i18n="counter_support">Soat Texnik Yordam (7/24)</p>
         </div>
     </section>
 
     <!-- Interactive Price Calculator -->
     <section id="calculator" class="calculator-section">
         <div class="section-title">
-            <h2>Loyiha Narxini Hisoblash</h2>
-            <p>Ehtiyojingizga mos funksiyalarni tanlang va taxminiy narx hamda muddatni ko'ring</p>
+            <h2 data-i18n="calc_title">Loyiha Narxini Hisoblash</h2>
+            <p data-i18n="calc_subtitle">Ehtiyojingizga mos funksiyalarni tanlang va taxminiy narx hamda muddatni ko'ring</p>
         </div>
 
         <div class="calc-box">
             <div class="calc-options">
-                <h3>1. Loyiha Turini Tanlang:</h3>
+                <h3 data-i18n="calc_step1">1. Loyiha Turini Tanlang:</h3>
                 <div class="calc-group">
-                    <label><input type="radio" name="projectType" value="150" checked> Standart Telegram Bot (150$)</label>
-                    <label><input type="radio" name="projectType" value="300"> Full WebApp / Telegram Mini App (300$)</label>
-                    <label><input type="radio" name="projectType" value="450"> Murakkab CRM Tizim & Enterprise Bot (450$)</label>
+                    <label>
+                        <input type="radio" name="projectType" value="150" data-time="3-5" checked> 
+                        <span data-i18n="calc_opt_bot">Standart Telegram Bot (150$)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="projectType" value="300" data-time="5-10"> 
+                        <span data-i18n="calc_opt_miniapp">Full WebApp / Telegram Mini App (300$)</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="projectType" value="450" data-time="10-18"> 
+                        <span data-i18n="calc_opt_crm">Murakkab CRM Tizim & Enterprise Bot (450$)</span>
+                    </label>
                 </div>
 
-                <h3>2. Qo'shimcha Integratsiyalar:</h3>
+                <h3 data-i18n="calc_step2">2. Qo'shimcha Integratsiyalar:</h3>
                 <div class="calc-group">
-                    <label><input type="checkbox" class="calc-addon" value="80"> Payme / Click To'lov Tizimi (+80$)</label>
-                    <label><input type="checkbox" class="calc-addon" value="50"> Multi-Language (Ko'p tillilik) (+50$)</label>
-                    <label><input type="checkbox" class="calc-addon" value="100"> Shaxsiy Admin Panel & Analytics (+100$)</label>
+                    <label>
+                        <input type="checkbox" class="calc-addon" value="80" data-time-add="2"> 
+                        <span data-i18n="calc_addon_payment">Payme / Click To'lov Tizimi (+80$)</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="calc-addon" value="50" data-time-add="1"> 
+                        <span data-i18n="calc_addon_i18n">Multi-Language (Ko'p tillilik) (+50$)</span>
+                    </label>
+                    <label>
+                        <input type="checkbox" class="calc-addon" value="100" data-time-add="3"> 
+                        <span data-i18n="calc_addon_admin">Shaxsiy Admin Panel & Analytics (+100$)</span>
+                    </label>
                 </div>
             </div>
 
             <div class="calc-result">
-                <h4>Jami Taxminiy Qiymat:</h4>
+                <h4 data-i18n="calc_total_title">Jami Taxminiy Qiymat:</h4>
                 <div class="price-display">$<span id="totalPrice">150</span></div>
-                <p class="calc-time">Taxminiy Tayyor Bo'lish Vaqti: <strong id="totalTime">3-5 kun</strong></p>
-                <button type="button" id="sendOrderBtn" class="btn btn-primary calc-btn">
+                <p class="calc-time"><span data-i18n="calc_time_title">Taxminiy Tayyor Bo'lish Vaqti:</span> <strong id="totalTime">3-5 kun</strong></p>
+                <button type="button" id="sendOrderBtn" class="btn btn-primary calc-btn" data-i18n="calc_btn_order">
                     🚀 Ushbu Konfiguratsiyani Buyurtma Qilish
                 </button>
             </div>
@@ -149,15 +168,15 @@
     <!-- Filterable Portfolio Section -->
     <section id="portfolio" class="portfolio">
         <div class="section-title">
-            <h2>Tayyor Loyihalarimiz</h2>
-            <p>Sohalar bo'yicha saralangan amaliy IT-yechimlar va Case-Study'lar</p>
+            <h2 data-i18n="portfolio_title">Tayyor Loyihalarimiz</h2>
+            <p data-i18n="portfolio_subtitle">Sohalar bo'yicha saralangan amaliy IT-yechimlar va Case-Study'lar</p>
         </div>
 
         <div class="portfolio-filter">
-            <button class="filter-btn active" data-filter="all">Barchasi</button>
-            <button class="filter-btn" data-filter="miniapp">Mini Apps</button>
-            <button class="filter-btn" data-filter="crm">CRM & Automations</button>
-            <button class="filter-btn" data-filter="ecommerce">E-Commerce</button>
+            <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Barchasi</button>
+            <button class="filter-btn" data-filter="miniapp" data-i18n="filter_miniapp">Mini Apps</button>
+            <button class="filter-btn" data-filter="crm" data-i18n="filter_crm">CRM & Automations</button>
+            <button class="filter-btn" data-filter="ecommerce" data-i18n="filter_ecommerce">E-Commerce</button>
         </div>
 
         <div class="portfolio-grid">
@@ -165,44 +184,44 @@
                 <span class="tag">Telegram Mini App</span>
                 <h3 data-i18n="p1_title">CyberNova E-Commerce Store</h3>
                 <p data-i18n="p1_desc">Telegram ichidagi to'liq WebApp internet-do'kon. Payme integratsiyasi hamda kuryer paneli bilan.</p>
-                <div class="card-actions" style="margin-top: 15px; display: flex; gap: 10px;">
-                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" class="link-btn">Demo Sinash &rarr;</a>
-                    <button class="btn btn-secondary open-modal-btn" data-modal="project-1" data-i18n="btn_details" style="padding: 6px 12px; font-size: 0.85rem;">Batafsil</button>
+                <div class="card-actions">
+                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" rel="noopener noreferrer" class="link-btn" data-i18n="btn_demo">Demo Sinash &rarr;</a>
+                    <button class="btn btn-secondary open-modal-btn" data-modal="project-1" data-i18n="btn_details">Batafsil</button>
                 </div>
             </div>
 
             <div class="portfolio-card" data-category="crm" data-id="project-2">
                 <span class="tag">CRM Tizim</span>
-                <h3>Hotel & Booking Automation</h3>
-                <p>Xonalarni avtomatik bron qilish, to'lovni tasdiqlash va xodimlarga bildirishnoma yuborish bot platformasi.</p>
-                <div class="card-actions" style="margin-top: 15px; display: flex; gap: 10px;">
-                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" class="link-btn">Demo Sinash &rarr;</a>
-                    <button class="btn btn-secondary open-modal-btn" data-modal="project-2" data-i18n="btn_details" style="padding: 6px 12px; font-size: 0.85rem;">Batafsil</button>
+                <h3 data-i18n="p2_title">Hotel & Booking Automation</h3>
+                <p data-i18n="p2_desc">Xonalarni avtomatik bron qilish, to'lovni tasdiqlash va xodimlarga bildirishnoma yuborish bot platformasi.</p>
+                <div class="card-actions">
+                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" rel="noopener noreferrer" class="link-btn" data-i18n="btn_demo">Demo Sinash &rarr;</a>
+                    <button class="btn btn-secondary open-modal-btn" data-modal="project-2" data-i18n="btn_details">Batafsil</button>
                 </div>
             </div>
 
             <div class="portfolio-card" data-category="ecommerce" data-id="project-3">
                 <span class="tag">E-Commerce</span>
-                <h3>Food Delivery & Order Bot</h3>
-                <p>Restoran va kafolar uchun interaktiv menyu, geolokatsiya aniqlash va buyurtma holatini kuzatish boti.</p>
-                <div class="card-actions" style="margin-top: 15px; display: flex; gap: 10px;">
-                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" class="link-btn">Demo Sinash &rarr;</a>
-                    <button class="btn btn-secondary open-modal-btn" data-modal="project-3" data-i18n="btn_details" style="padding: 6px 12px; font-size: 0.85rem;">Batafsil</button>
+                <h3 data-i18n="p3_title">Food Delivery & Order Bot</h3>
+                <p data-i18n="p3_desc">Restoran va kafolar uchun interaktiv menyu, geolokatsiya aniqlash va buyurtma holatini kuzatish boti.</p>
+                <div class="card-actions">
+                    <a href="https://t.me/CyberNovaPortfolioBot" target="_blank" rel="noopener noreferrer" class="link-btn" data-i18n="btn_demo">Demo Sinash &rarr;</a>
+                    <button class="btn btn-secondary open-modal-btn" data-modal="project-3" data-i18n="btn_details">Batafsil</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials (Mijozlar Fikrlari) Section -->
+    <!-- Testimonials Section -->
     <section class="testimonials-section">
         <div class="section-title">
-            <h2>Mijozlarimiz <span class="highlight">Fikri</span></h2>
-            <p>CyberNova bilan hamkorlik qilgan biznes vakillarining sharhlari</p>
+            <h2 data-i18n="reviews_title">Mijozlarimiz <span class="highlight">Fikri</span></h2>
+            <p data-i18n="reviews_subtitle">CyberNova bilan hamkorlik qilgan biznes vakillarining sharhlari</p>
         </div>
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Internet do'konimiz uchun Telegram Mini App yaratib berishdi. Integratsiyalar tez va sifatli bo'ldi. Savdo 40% ga oshdi!"</p>
+                <p class="review-text" data-i18n="rev1_text">"Internet do'konimiz uchun Telegram Mini App yaratib berishdi. Integratsiyalar tez va sifatli bo'ldi. Savdo 40% ga oshdi!"</p>
                 <div class="client-info">
                     <h4>Jasur Bekmurodov</h4>
                     <span>CEO, TechnoStore</span>
@@ -210,7 +229,7 @@
             </div>
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p class="review-text">"Bot va CRM avtomatlashtirish natijasida mehmonxona bandlovlari avtomatik ishlayapti. Ish vaqtimiz 3 barobar tejalladi."</p>
+                <p class="review-text" data-i18n="rev2_text">"Bot va CRM avtomatlashtirish natijasida mehmonxona bandlovlari avtomatik ishlayapti. Ish vaqtimiz 3 barobar tejalladi."</p>
                 <div class="client-info">
                     <h4>Sardor Raximov</h4>
                     <span>Menejer, Royal Hotel</span>
@@ -223,7 +242,7 @@
     <section class="faq-section" id="faq">
         <div class="section-title">
             <h2 data-i18n="faq_title">Ko'p Beriladigan Savollar</h2>
-            <p>Buyurtma va loyihalarimiz haqida eng ko'p beriladigan savollarga javoblar</p>
+            <p data-i18n="faq_subtitle">Buyurtma va loyihalarimiz haqida eng ko'p beriladigan savollarga javoblar</p>
         </div>
         <div class="faq-container">
             <div class="faq-item">
@@ -258,17 +277,18 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="logo">Cyber<span class="highlight">Nova</span></div>
-            <p>B2B IT-Studio — Biznes jarayonlarini avtomatlashtirish yechimlari.</p>
+            <p data-i18n="footer_desc">B2B IT-Studio — Biznes jarayonlarini avtomatlashtirish yechimlari.</p>
             <div class="footer-contacts">
-                <p>Telegram: <a href="https://t.me/O_Obidovich" target="_blank">@O_Obidovich</a></p>
-                <p>Tel: +998 (95) 244-07-10</p>
+                <p>Telegram: <a href="https://t.me/O_Obidovich" target="_blank" rel="noopener noreferrer">@O_Obidovich</a></p>
+                <p>Tel: <a href="tel:+998952440710">+998 (95) 244-07-10</a></p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 CyberNova IT-Studio. Barcha huquqlar himoyalangan.</p>
+            <p>&copy; 2026 CyberNova IT-Studio. <span data-i18n="footer_rights">Barcha huquqlar himoyalangan.</span></p>
         </div>
     </footer>
 
@@ -280,11 +300,11 @@
         <div id="chatBox" class="chat-box hide">
             <div class="chat-header">
                 <h4>CyberNova Support</h4>
-                <button id="closeChatBtn">&times;</button>
+                <button id="closeChatBtn" aria-label="Close Chat">&times;</button>
             </div>
             <div class="chat-body">
                 <p class="chat-welcome" data-i18n="chat_welcome">Salom! Savolingiz bo'lsa, adminga yozishingiz mumkin:</p>
-                <a href="https://t.me/O_Obidovich" target="_blank" class="chat-tg-btn">
+                <a href="https://t.me/O_Obidovich" target="_blank" rel="noopener noreferrer" class="chat-tg-btn" data-i18n="chat_btn">
                     ✈️ Telegram'da Yozish
                 </a>
             </div>
@@ -294,16 +314,16 @@
     <!-- Dynamic Portfolio Case-Study Modal Structure -->
     <div id="portfolioModal" class="modal-overlay hide">
         <div class="modal-content">
-            <button class="modal-close">&times;</button>
+            <button class="modal-close" aria-label="Close Modal">&times;</button>
             <div class="modal-body">
                 <h2 id="modalTitle">Loyiha Nomi</h2>
-                <div class="modal-tags" id="modalTags" style="margin: 10px 0; color: #00f2fe; font-weight: 600; font-size: 0.9rem;"></div>
-                <p id="modalDescription" style="color: #ccc; margin-bottom: 15px;">Loyiha haqida batafsil ma'lumot...</p>
-                <div class="modal-details" style="background: rgba(0,242,254,0.05); padding: 12px; border-radius: 8px; margin-bottom: 20px;">
-                    <p style="margin-bottom: 5px;"><strong>Stack:</strong> <span id="modalTech">HTML, CSS, JS, Python, Aiogram</span></p>
-                    <p><strong>Muddat:</strong> <span id="modalDuration">5 kun</span></p>
+                <div class="modal-tags" id="modalTags"></div>
+                <p id="modalDescription">Loyiha haqida batafsil ma'lumot...</p>
+                <div class="modal-details">
+                    <p><strong>Stack:</strong> <span id="modalTech">HTML, CSS, JS, Python, Aiogram</span></p>
+                    <p><strong data-i18n="modal_duration">Muddat:</strong> <span id="modalDuration">5 kun</span></p>
                 </div>
-                <a id="modalLink" href="#" target="_blank" class="btn btn-primary modal-link-btn" data-i18n="btn_view_project" style="display: block; text-align: center;">Demoni Ko'rish</a>
+                <a id="modalLink" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary modal-link-btn" data-i18n="btn_view_project">Demoni Ko'rish</a>
             </div>
         </div>
     </div>
