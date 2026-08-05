@@ -3,153 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYBERNOVA — IT & Cybersecurity Solutions</title>
-    <!-- Telegram WebApp SDK -->
+    <title>CYBERNOVA — Security & IT Solutions</title>
+    <!-- Telegram Web App SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- FontAwesome Ikonkalari -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <!-- Header / Banner -->
-        <header class="cyber-header">
-            <div class="logo-area">
-                <i class="fa-solid fa-shield-halved cyber-icon"></i>
-                <div class="brand-text">
-                    <h1>CYBERNOVA</h1>
-                    <span class="badge">SECURITY & IT</span>
-                </div>
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="logo-box">
+                <i data-lucide="shield-check" class="logo-icon"></i>
             </div>
-            <p class="tagline">Biznesingiz uchun raqamli xavfsizlik va zamonaviy IT yechimlar</p>
+            <h1>CYBERNOVA</h1>
+            <p class="subtitle">Kiberxavfsizlik va Zamonaviy IT Yechimlar</p>
         </header>
 
-        <!-- Navigation Tabs -->
-        <nav class="cyber-tabs">
-            <button class="tab-btn active" onclick="openTab('servicesTab')">
-                <i class="fa-solid fa-list-check"></i> Xizmatlar
-            </button>
-            <button class="tab-btn" onclick="openTab('orderTab')">
-                <i class="fa-solid fa-paper-plane"></i> Ariza Berish
-            </button>
-            <button class="tab-btn" onclick="openTab('aboutTab')">
-                <i class="fa-solid fa-circle-info"></i> Biz Haqimizda
-            </button>
-        </nav>
-
-        <!-- TAB 1: XIZMATLAR KATALOGI -->
-        <section id="servicesTab" class="tab-content active">
-            <h2 class="section-title">Asosiy Xizmat Yo'nalishlari</h2>
-            
-            <div class="services-list">
-                <!-- Xizmat 1 -->
-                <div class="service-card" onclick="selectServiceForOrder('Kiberxavfsizlik Auditi va Pentest')">
-                    <div class="card-icon"><i class="fa-solid fa-bug-slash"></i></div>
-                    <div class="card-info">
-                        <h3>Kiberxavfsizlik Auditi & Pentest</h3>
-                        <p>Sayt, server va ilovalardagi zaifliklarni aniqlash hamda buzib kirishlardan xavfsizlash.</p>
-                        <span class="service-tag">Xavfsizlik</span>
+        <!-- Services Section -->
+        <section class="section">
+            <h2 class="section-title"><i data-lucide="layers"></i> Xizmatlarimiz</h2>
+            <div class="services-grid">
+                
+                <div class="service-card active" onclick="selectService(this, 'Kiberxavfsizlik Auditi')">
+                    <div class="card-header">
+                        <i data-lucide="shield-alert" class="card-icon"></i>
+                        <h3>Kiberxavfsizlik Auditi</h3>
                     </div>
+                    <p>Tizim va veb-saytlardagi zaifliklarni aniqlash (Penetration Testing).</p>
                 </div>
 
-                <!-- Xizmat 2 -->
-                <div class="service-card" onclick="selectServiceForOrder('Web App va Telegram Bot Ishlab Chiqish')">
-                    <div class="card-icon"><i class="fa-solid fa-code"></i></div>
-                    <div class="card-info">
-                        <h3>Web App & Telegram Botlar</h3>
-                        <p>Biznes jarayonlarini avtomatlashtiruvchi Telegram Mini-App va veb-ilovani yaratish.</p>
-                        <span class="service-tag">Development</span>
+                <div class="service-card" onclick="selectService(this, 'Web & Telegram Bot Yaratish')">
+                    <div class="card-header">
+                        <i data-lucide="code-2" class="card-icon"></i>
+                        <h3>Web App & Botlar</h3>
                     </div>
+                    <p>Biznes uchun eksklyuziv veb-saytlar, Web App va avtomatlashtirilgan botlar.</p>
                 </div>
 
-                <!-- Xizmat 3 -->
-                <div class="service-card" onclick="selectServiceForOrder('Mehmonxona va Biznes Tizimlari (PMS/CRM)')">
-                    <div class="card-icon"><i class="fa-solid fa-hotel"></i></div>
-                    <div class="card-info">
-                        <h3>Mehmonxona & CRM Tizimlari</h3>
-                        <p>Bron qilish, mijozlar va xodimlarni boshqarish uchun maxsus raqamli platformalar.</p>
-                        <span class="service-tag">B2B Yechimlar</span>
+                <div class="service-card" onclick="selectService(this, 'Server & Infratuzilma')">
+                    <div class="card-header">
+                        <i data-lucide="server" class="card-icon"></i>
+                        <h3>IT Infratuzilma</h3>
                     </div>
+                    <p>Serverlarni sozlash, DB optimizatsiyasi va 24/7 xavfsiz hosting.</p>
                 </div>
 
-                <!-- Xizmat 4 -->
-                <div class="service-card" onclick="selectServiceForOrder('Server va IT Infratuzilma')">
-                    <div class="card-icon"><i class="fa-solid fa-server"></i></div>
-                    <div class="card-info">
-                        <h3>Server & Cloud Infratuzilma</h3>
-                        <p>Serverlarni sozlash, ma'lumotlar bazasini optimizatsiya qilish va 24/7 monitoring.</p>
-                        <span class="service-tag">Infratuzilma</span>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- TAB 2: ARIZA QOLDIRISH FORMASI -->
-        <section id="orderTab" class="tab-content">
-            <h2 class="section-title">Loyihaga Ariza Qoldirish</h2>
-            
-            <form id="cyberForm" onsubmit="submitLeadForm(event)">
-                <div class="form-group">
-                    <label for="userName"><i class="fa-solid fa-user"></i> Ismingiz / Tashkilot nomi *</label>
-                    <input type="text" id="userName" placeholder="Masalan: Odiljon Radjabov" required>
+        <!-- Application Form -->
+        <section class="section">
+            <h2 class="section-title"><i data-lucide="send"></i> Ariza Qoldirish</h2>
+            <form id="leadForm" onsubmit="handleFormSubmit(event)">
+                
+                <input type="hidden" id="selectedService" value="Kiberxavfsizlik Auditi">
+
+                <div class="input-group">
+                    <label for="name"><i data-lucide="user"></i> Ismingiz / Korxona nomi</label>
+                    <input type="text" id="name" placeholder="Masalan: Odiljon / Cyber Corp" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="userPhone"><i class="fa-solid fa-phone"></i> Telefon Raqamingiz *</label>
-                    <input type="tel" id="userPhone" placeholder="+998 90 123 45 67" required>
+                <div class="input-group">
+                    <label for="phone"><i data-lucide="phone"></i> Telefon raqamingiz</label>
+                    <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="serviceType"><i class="fa-solid fa-gears"></i> Tanlangan Xizmat</label>
-                    <select id="serviceType">
-                        <option value="Kiberxavfsizlik Auditi va Pentest">Kiberxavfsizlik Auditi & Pentest</option>
-                        <option value="Web App va Telegram Bot Ishlab Chiqish">Web App & Telegram Botlar</option>
-                        <option value="Mehmonxona va Biznes Tizimlari (PMS/CRM)">Mehmonxona & CRM Tizimlari</option>
-                        <option value="Server va IT Infratuzilma">Server & Cloud Infratuzilma</option>
-                        <option value="Boshqa / Konsultatsiya">Boshqa / Maxsus Loyiha</option>
-                    </select>
+                <div class="input-group">
+                    <label for="message"><i data-lucide="message-square"></i> Qo'shimcha ma'lumot</label>
+                    <textarea id="message" rows="3" placeholder="Loyiha yoki talablaringiz haqida qisqacha yozing..."></textarea>
                 </div>
 
-                <div class="form-group">
-                    <label for="userMessage"><i class="fa-solid fa-comment-dots"></i> Loyiha haqida qisqacha</label>
-                    <textarea id="userMessage" rows="4" placeholder="Loyiha maqsadi yoki talablaringizni yozing..."></textarea>
-                </div>
-
-                <button type="submit" id="submitBtn" class="cyber-btn">
-                    <i class="fa-solid fa-paper-plane"></i> Yuborish
+                <button type="submit" id="submitBtn" class="btn-submit">
+                    <span id="btnText">Arizani Yuborish</span>
+                    <i data-lucide="arrow-right" id="btnIcon"></i>
                 </button>
             </form>
         </section>
 
-        <!-- TAB 3: BIZ HAQIMIZDA -->
-        <section id="aboutTab" class="tab-content">
-            <h2 class="section-title">Cybernova Haqida</h2>
-            <div class="about-card">
-                <p><strong>CYBERNOVA</strong> — biznesingiz uchun eng so'nggi texnologiyalarga asoslangan IT infratuzilma va kiberxavfsizlik choralarini taqdim etadi.</p>
-                
-                <div class="features-list">
-                    <div class="feature-item"><i class="fa-solid fa-check-double"></i> 100% Ma'lumotlar xavfsizligi</div>
-                    <div class="feature-item"><i class="fa-solid fa-bolt"></i> Yuqori tezlikdagi backend serverlar</div>
-                    <div class="feature-item"><i class="fa-solid fa-headset"></i> 24/7 Uzluksiz texnik qo'llab-quvvatlash</div>
-                </div>
-
-                <div class="contact-box">
-                    <h4><i class="fa-solid fa-address-book"></i> Aloqa uchun:</h4>
-                    <p><i class="fa-solid fa-globe"></i> Rasmiy bot: @Cybernova_Bot</p>
-                    <p><i class="fa-solid fa-shield"></i> Qo'llab-quvvatlash xizmati mavjud</p>
-                </div>
-            </div>
-        </section>
-
         <!-- Footer -->
-        <footer class="cyber-footer">
-            <p>CYBERNOVA © 2026 | Safe & Reliable IT Infrastructure</p>
+        <footer>
+            <p>🛡️ CYBERNOVA © 2026. Barcha huquqlar himoyalangan.</p>
         </footer>
     </div>
 
-    <!-- Toast Xabarnoma Statusi -->
-    <div id="toastNotification" class="toast-hidden"></div>
+    <!-- Status Toast Notification -->
+    <div id="toast" class="toast"></div>
 
     <script src="script.js"></script>
 </body>
