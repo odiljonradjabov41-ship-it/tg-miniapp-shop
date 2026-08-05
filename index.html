@@ -3,249 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cybernova — Kiberxavfsizlik va IT Yechimlari</title>
+    <title>CYBERNOVA — IT & Cybersecurity Solutions</title>
     <!-- Telegram WebApp SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        :root {
-            --bg-color: #0d1117;
-            --card-bg: #161b22;
-            --accent-color: #00f2fe;
-            --text-color: #f0f6fc;
-            --text-secondary: #8b949e;
-            --border-color: #30363d;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 500px;
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 30px rgba(0, 242, 254, 0.1);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .logo {
-            width: 70px;
-            height: 70px;
-            margin-bottom: 12px;
-        }
-
-        h1 {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 2px;
-        }
-
-        h1 span {
-            color: var(--accent-color);
-        }
-
-        p.subtitle {
-            color: var(--text-secondary);
-            font-size: 13px;
-            margin-top: 4px;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        label {
-            display: block;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-color);
-            font-size: 14px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-color);
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-            border: none;
-            border-radius: 8px;
-            color: #000;
-            font-weight: bold;
-            font-size: 15px;
-            cursor: pointer;
-            transition: opacity 0.3s ease;
-        }
-
-        button:hover {
-            opacity: 0.9;
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .status-msg {
-            margin-top: 14px;
-            text-align: center;
-            font-size: 14px;
-            display: none;
-        }
-
-        .status-msg.success {
-            color: #2ea043;
-            display: block;
-        }
-
-        .status-msg.error {
-            color: #f85149;
-            display: block;
-        }
-    </style>
+    <!-- FontAwesome Ikonkalari -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <!-- CYBERNOVA SVG Logo -->
-        <svg class="logo" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <linearGradient id="cyberGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#00F2FE" />
-                    <stop offset="100%" stop-color="#4FACFE" />
-                </linearGradient>
-            </defs>
-            <rect width="500" height="500" rx="60" fill="#0D1117" />
-            <path d="M 250 85 L 350 135 C 350 255 290 325 250 365 C 210 325 150 255 150 135 Z" fill="#161B22" stroke="url(#cyberGradient)" stroke-width="10" stroke-linejoin="round" />
-            <circle cx="250" cy="215" r="24" fill="#0D1117" stroke="url(#cyberGradient)" stroke-width="6" />
-            <circle cx="250" cy="215" r="9" fill="#00F2FE" />
-        </svg>
-        <h1>CYBER<span>NOVA</span></h1>
-        <p class="subtitle">Kiberxavfsizlik va IT xizmatlari bo'yicha ariza qoldiring</p>
+    <div class="main-container">
+        <!-- Header / Banner -->
+        <header class="cyber-header">
+            <div class="logo-area">
+                <i class="fa-solid fa-shield-halved cyber-icon"></i>
+                <div class="brand-text">
+                    <h1>CYBERNOVA</h1>
+                    <span class="badge">SECURITY & IT</span>
+                </div>
+            </div>
+            <p class="tagline">Biznesingiz uchun raqamli xavfsizlik va zamonaviy IT yechimlar</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="cyber-tabs">
+            <button class="tab-btn active" onclick="openTab('servicesTab')">
+                <i class="fa-solid fa-list-check"></i> Xizmatlar
+            </button>
+            <button class="tab-btn" onclick="openTab('orderTab')">
+                <i class="fa-solid fa-paper-plane"></i> Ariza Berish
+            </button>
+            <button class="tab-btn" onclick="openTab('aboutTab')">
+                <i class="fa-solid fa-circle-info"></i> Biz Haqimizda
+            </button>
+        </nav>
+
+        <!-- TAB 1: XIZMATLAR KATALOGI -->
+        <section id="servicesTab" class="tab-content active">
+            <h2 class="section-title">Asosiy Xizmat Yo'nalishlari</h2>
+            
+            <div class="services-list">
+                <!-- Xizmat 1 -->
+                <div class="service-card" onclick="selectServiceForOrder('Kiberxavfsizlik Auditi va Pentest')">
+                    <div class="card-icon"><i class="fa-solid fa-bug-slash"></i></div>
+                    <div class="card-info">
+                        <h3>Kiberxavfsizlik Auditi & Pentest</h3>
+                        <p>Sayt, server va ilovalardagi zaifliklarni aniqlash hamda buzib kirishlardan xavfsizlash.</p>
+                        <span class="service-tag">Xavfsizlik</span>
+                    </div>
+                </div>
+
+                <!-- Xizmat 2 -->
+                <div class="service-card" onclick="selectServiceForOrder('Web App va Telegram Bot Ishlab Chiqish')">
+                    <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+                    <div class="card-info">
+                        <h3>Web App & Telegram Botlar</h3>
+                        <p>Biznes jarayonlarini avtomatlashtiruvchi Telegram Mini-App va veb-ilovani yaratish.</p>
+                        <span class="service-tag">Development</span>
+                    </div>
+                </div>
+
+                <!-- Xizmat 3 -->
+                <div class="service-card" onclick="selectServiceForOrder('Mehmonxona va Biznes Tizimlari (PMS/CRM)')">
+                    <div class="card-icon"><i class="fa-solid fa-hotel"></i></div>
+                    <div class="card-info">
+                        <h3>Mehmonxona & CRM Tizimlari</h3>
+                        <p>Bron qilish, mijozlar va xodimlarni boshqarish uchun maxsus raqamli platformalar.</p>
+                        <span class="service-tag">B2B Yechimlar</span>
+                    </div>
+                </div>
+
+                <!-- Xizmat 4 -->
+                <div class="service-card" onclick="selectServiceForOrder('Server va IT Infratuzilma')">
+                    <div class="card-icon"><i class="fa-solid fa-server"></i></div>
+                    <div class="card-info">
+                        <h3>Server & Cloud Infratuzilma</h3>
+                        <p>Serverlarni sozlash, ma'lumotlar bazasini optimizatsiya qilish va 24/7 monitoring.</p>
+                        <span class="service-tag">Infratuzilma</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: ARIZA QOLDIRISH FORMASI -->
+        <section id="orderTab" class="tab-content">
+            <h2 class="section-title">Loyihaga Ariza Qoldirish</h2>
+            
+            <form id="cyberForm" onsubmit="submitLeadForm(event)">
+                <div class="form-group">
+                    <label for="userName"><i class="fa-solid fa-user"></i> Ismingiz / Tashkilot nomi *</label>
+                    <input type="text" id="userName" placeholder="Masalan: Odiljon Radjabov" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="userPhone"><i class="fa-solid fa-phone"></i> Telefon Raqamingiz *</label>
+                    <input type="tel" id="userPhone" placeholder="+998 90 123 45 67" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceType"><i class="fa-solid fa-gears"></i> Tanlangan Xizmat</label>
+                    <select id="serviceType">
+                        <option value="Kiberxavfsizlik Auditi va Pentest">Kiberxavfsizlik Auditi & Pentest</option>
+                        <option value="Web App va Telegram Bot Ishlab Chiqish">Web App & Telegram Botlar</option>
+                        <option value="Mehmonxona va Biznes Tizimlari (PMS/CRM)">Mehmonxona & CRM Tizimlari</option>
+                        <option value="Server va IT Infratuzilma">Server & Cloud Infratuzilma</option>
+                        <option value="Boshqa / Konsultatsiya">Boshqa / Maxsus Loyiha</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="userMessage"><i class="fa-solid fa-comment-dots"></i> Loyiha haqida qisqacha</label>
+                    <textarea id="userMessage" rows="4" placeholder="Loyiha maqsadi yoki talablaringizni yozing..."></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="cyber-btn">
+                    <i class="fa-solid fa-paper-plane"></i> Yuborish
+                </button>
+            </form>
+        </section>
+
+        <!-- TAB 3: BIZ HAQIMIZDA -->
+        <section id="aboutTab" class="tab-content">
+            <h2 class="section-title">Cybernova Haqida</h2>
+            <div class="about-card">
+                <p><strong>CYBERNOVA</strong> — biznesingiz uchun eng so'nggi texnologiyalarga asoslangan IT infratuzilma va kiberxavfsizlik choralarini taqdim etadi.</p>
+                
+                <div class="features-list">
+                    <div class="feature-item"><i class="fa-solid fa-check-double"></i> 100% Ma'lumotlar xavfsizligi</div>
+                    <div class="feature-item"><i class="fa-solid fa-bolt"></i> Yuqori tezlikdagi backend serverlar</div>
+                    <div class="feature-item"><i class="fa-solid fa-headset"></i> 24/7 Uzluksiz texnik qo'llab-quvvatlash</div>
+                </div>
+
+                <div class="contact-box">
+                    <h4><i class="fa-solid fa-address-book"></i> Aloqa uchun:</h4>
+                    <p><i class="fa-solid fa-globe"></i> Rasmiy bot: @Cybernova_Bot</p>
+                    <p><i class="fa-solid fa-shield"></i> Qo'llab-quvvatlash xizmati mavjud</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="cyber-footer">
+            <p>CYBERNOVA © 2026 | Safe & Reliable IT Infrastructure</p>
+        </footer>
     </div>
 
-    <form id="contactForm">
-        <div class="form-group">
-            <label for="name">Ismingiz *</label>
-            <input type="text" id="name" required placeholder="Masalan: Odiljon">
-        </div>
+    <!-- Toast Xabarnoma Statusi -->
+    <div id="toastNotification" class="toast-hidden"></div>
 
-        <div class="form-group">
-            <label for="contact">Telefon yoki Telegram @username *</label>
-            <input type="text" id="contact" required placeholder="+998901234567 yoki @username">
-        </div>
-
-        <div class="form-group">
-            <label for="service">Xizmat turini tanlang</label>
-            <select id="service">
-                <option value="Kiberxavfsizlik Auditi">Kiberxavfsizlik Auditi</option>
-                <option value="Veb-sayt / Bot Yaratish">Veb-sayt / Bot Yaratish</option>
-                <option value="Antivirus Yechimlari">Antivirus Yechimlari</option>
-                <option value="Boshqa IT Konsultatsiya">Boshqa IT Konsultatsiya</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="message">Qo'shimcha izoh</label>
-            <textarea id="message" rows="3" placeholder="Loyiha haqida qisqacha ma'lumot..."></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn">Murojaatni Yuborish</button>
-    </form>
-
-    <div id="statusMsg" class="status-msg"></div>
-</div>
-
-<script>
-    // Telegram WebApp interfeysini moslashtirish
-    if (window.Telegram && window.Telegram.WebApp) {
-        window.Telegram.WebApp.ready();
-        window.Telegram.WebApp.expand();
-    }
-
-    // ⚠️ Backend URL (Render serveringiz manzili)
-    const BACKEND_URL = 'https://cybernova-backend.onrender.com';
-
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const statusMsg = document.getElementById('statusMsg');
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-
-        const name = document.getElementById('name').value;
-        const contact = document.getElementById('contact').value;
-        const service = document.getElementById('service').value;
-        const message = document.getElementById('message').value;
-
-        submitBtn.disabled = true;
-        submitBtn.innerText = 'Yuborilmoqda...';
-        statusMsg.className = 'status-msg';
-        statusMsg.style.display = 'none';
-
-        try {
-            const response = await fetch(`${BACKEND_URL}/api/contact`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, contact, service, message })
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-                statusMsg.innerText = '✅ Murojaatingiz qabul qilindi! Tez orada bog\'lanamiz.';
-                statusMsg.className = 'status-msg success';
-                form.reset();
-            } else {
-                statusMsg.innerText = '❌ Xatolik: ' + (result.error || 'Qayta urinib ko\'ring');
-                statusMsg.className = 'status-msg error';
-            }
-        } catch (err) {
-            console.error(err);
-            statusMsg.innerText = '❌ Serverga ulanishda xatolik yuz berdi.';
-            statusMsg.className = 'status-msg error';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerText = 'Murojaatni Yuborish';
-        }
-    });
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
