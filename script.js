@@ -1,52 +1,87 @@
-// Lucide ikonkalarni faollashtirish
-lucide.createIcons();
-
-// Telegram Web App ob'ekti
+// Telegram Web App SDK integratsiyasi
 const tg = window.Telegram?.WebApp;
-if (tg) {
-    tg.expand(); // Ekran bo'ylab yoyish
-}
 
-// Render Backend Server havolangiz
+// Backend Render Server havolasi
 const BACKEND_URL = 'https://cybernova-backend.onrender.com';
 
-// Telegram foydalanuvchi ismini avtomatik to'ldirish
+// Sahifa yuklanganda ishga tushuvchi logika
 document.addEventListener("DOMContentLoaded", () => {
+    // WebApp interfeysini kengaytirish
+    if (tg) {
+        tg.ready();
+        tg.expand();
+    }
+
+    // Telegram foydalanuvchisi ma'lumotlarini avtomatik to'ldirish
     if (tg?.initDataUnsafe?.user) {
         const user = tg.initDataUnsafe.user;
-        const nameInput = document.getElementById("name");
+        const nameInput = document.getElementById("userName");
         if (nameInput && !nameInput.value) {
-            nameInput.value = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+            const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim();
+            nameInput.value = fullName;
         }
     }
 });
 
-// Xizmatni tanlash
-function selectService(cardElement, serviceName) {
-    document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
-    cardElement.classList.add('active');
-    document.getElementById('selectedService').value = serviceName;
+// Tablar o'rtasida o'tish
+function openTab(tabId) {
+    // Barcha tab mazmunlarini yashirish
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => content.classList.remove('active'));
+
+    // Barcha tab tugmalaridan active sinfini olib tashlash
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // Tanlangan tab va tugmani faollashtirish
+    const targetTab = document.getElementById(tabId);
+    if (targetTab) {
+        targetTab.classList.add('active');
+    }
+
+    // Bosilgan tugmaga active sinfini qo'shish
+    const activeBtn = Array.from(buttons).find(btn => 
+        btn.getAttribute('onclick')?.includes(tabId)
+    );
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+    }
 }
 
-// Formani yuborish
-async function handleFormSubmit(event) {
+// Xizmatlar ro'yxatidan tanlanganda to'g'ridan-to'g'ri Ariza oynasiga o'tkazish
+function selectServiceForOrder(serviceName) {
+    const serviceSelect = document.getElementById('serviceType');
+    if (serviceSelect) {
+        serviceSelect.value = serviceName;
+    }
+    
+    // Ariza berish tabiga avtomatik o'tish
+    openTab('orderTab');
+
+    // Telegram haptic feedback (vibratsiya)
+    if (tg?.HapticFeedback) {
+        tg.HapticFeedback.impactOccurred('light');
+    }
+}
+
+// Ariza formasini serverga yuborish
+async function submitLeadForm(event) {
     event.preventDefault();
 
     const submitBtn = document.getElementById('submitBtn');
-    const btnText = document.getElementById('btnText');
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const service = document.getElementById('selectedService').value;
-    const message = document.getElementById('message').value.trim();
+    const name = document.getElementById('userName').value.trim();
+    const phone = document.getElementById('userPhone').value.trim();
+    const service = document.getElementById('serviceType').value;
+    const message = document.getElementById('userMessage').value.trim();
 
     if (!name || !phone) {
-        showToast("⚠️ Iltimos, ism va telefon raqamingizni kiriting!");
+        showToast("⚠️ Iltimos, ismingiz va telefon raqamingizni kiriting!");
         return;
     }
 
-    // Yuklanish holati
+    // Tugma holatini o'zgartirish (Yuklanmoqda)
     submitBtn.disabled = true;
-    btnText.textContent = "Yuborilmoqda...";
+    submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Yuborilmoqda...`;
 
     try {
         const response = await fetch(`${BACKEND_URL}/api/submit-lead`, {
@@ -61,34 +96,38 @@ async function handleFormSubmit(event) {
 
         if (data.success) {
             showToast("✅ Arizangiz muvaffaqiyatli yuborildi!");
-            document.getElementById('message').value = '';
-            
-            // Telegram vibratsiya va yopilish effekti
+            document.getElementById('userMessage').value = '';
+
+            // Muvaffaqiyatli tebranish effekti
             if (tg?.HapticFeedback) {
                 tg.HapticFeedback.notificationOccurred('success');
             }
-            
+
+            // 2 soniyadan so'ng Telegram WebApp'ni avtomatik yopish
             setTimeout(() => {
                 if (tg) tg.close();
             }, 2000);
         } else {
-            showToast("❌ Xatolik yuz berdi. Qayta urinib ko'ring.");
+            showToast("❌ Xatolik: " + (data.error || "Arizani yuborib bo'lmadi."));
         }
     } catch (error) {
-        console.error('Fetch xatosi:', error);
+        console.error('Fetch API xatosi:', error);
         showToast("🌐 Server bilan aloqa o'rnatilmadi!");
     } finally {
         submitBtn.disabled = false;
-        btnText.textContent = "Arizani Yuborish";
+        submitBtn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> Yuborish`;
     }
 }
 
-// Bildirishnoma ko'rsatish
+// Toast bildirishnomasini ko'rsatish
 function showToast(text) {
-    const toast = document.getElementById('toast');
+    const toast = document.getElementById('toastNotification');
+    if (!toast) return;
+
     toast.textContent = text;
-    toast.classList.add('show');
+    toast.className = 'toast-visible';
+
     setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+        toast.className = 'toast-hidden';
+    }, 3500);
 }
