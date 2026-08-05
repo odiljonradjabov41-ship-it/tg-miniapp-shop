@@ -6,9 +6,9 @@ const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
 
-// SOZLAMALAR
-const BOT_TOKEN = '8923412278:AAEKnRhIPHXVEYOg-b88DcHhsbTcRQXcESA'; 
-const ADMIN_ID = 8810905742; 
+// SOZLAMALAR (Render/Railway va lokal muhit uchun moslashtirilgan)
+const BOT_TOKEN = process.env.BOT_TOKEN || '8923412278:AAEKnRhIPHXVEYOg-b88DcHhsbTcRQXcESA'; 
+const ADMIN_ID = process.env.ADMIN_ID || 8810905742; 
 
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 const app = express();
@@ -59,7 +59,7 @@ bot.onText(/\/start/, (msg) => {
         parse_mode: 'Markdown',
         reply_markup: {
             inline_keyboard: [
-                // ✅ GitHub repository nomi to'g'ri 'cybernova-webapp' ga almashtirildi:
+                // ✅ GitHub repository manzili aniq to'g'rilandi:
                 [{ text: "🌐 Cybernova Saytini Ochish", web_app: { url: "https://odiljonradjabov41-ship-it.github.io/cybernova-webapp/" } }]
             ]
         }
@@ -96,7 +96,7 @@ app.post('/api/contact', (req, res) => {
     );
 });
 
-// Serverni ishga tushirish
+// Serverni ishga tushirish (Render beradigan PORT ni avtomatik oladi)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Cybernova Server ${PORT}-portda ishlamoqda...`);
