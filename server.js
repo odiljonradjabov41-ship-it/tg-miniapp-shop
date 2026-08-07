@@ -5,8 +5,9 @@ const TelegramBot = typeof TelegramBotModule === 'function' ? TelegramBotModule 
 const express = require('express');
 const cors = require('cors');
 const sqlite3 = require('sqlite3').verbose();
+const https = require('https');
 
-// SOZLAMALAR (Render/Railway va lokal muhit uchun moslashtirilgan)
+// SOZLAMALAR (Render va lokal muhit uchun)
 const BOT_TOKEN = process.env.BOT_TOKEN || '8923412278:AAEKnRhIPHXVEYOg-b88DcHhsbTcRQXcESA'; 
 const ADMIN_ID = process.env.ADMIN_ID || 8810905742; 
 
@@ -59,16 +60,18 @@ bot.onText(/\/start/, (msg) => {
         parse_mode: 'Markdown',
         reply_markup: {
             inline_keyboard: [
-                // ✅ GitHub repository manzili aniq to'g'rilandi:
                 [{ text: "🌐 Cybernova Saytini Ochish", web_app: { url: "https://odiljonradjabov41-ship-it.github.io/cybernova-webapp/" } }]
             ]
         }
     });
 });
 
-// 4. Veb-saytdan keladigan murojaatlarni qabul qilish (API Endpoint)
-app.post('/api/contact', (req, res) => {
-    const { name, contact, service, message } = req.body;
+// 4. Veb-saytdan keladigan murojaatlarni qabul qilish (Ikkala route uchun ham moslashtirildi)
+const handleLeadSubmission = (req, res) => {
+    const name = req.body.name;
+    const contact = req.body.phone || req.body.contact; // Har ikki maydonni ham qabul qiladi
+    const service = req.body.service;
+    const message = req.body.message;
 
     if (!name || !contact) {
         return res.status(400).json({ success: false, error: "Ism va aloqa ma'lumoti kiritilishi shart." });
@@ -87,17 +90,37 @@ app.post('/api/contact', (req, res) => {
 
             // Telegram orqali Adminga xabar yuborish
             if (ADMIN_ID) {
-                const adminMsg = `🛡️ **CYBERNOVA — YANGI MUROJAAT! №${inquiryId}**\n\n👤 **Ism:** ${name}\n📞 **Aloqa:** ${contact}\n🔧 **Xizmat turi:** ${service || 'Ko\'rsatilmadi'}\n💬 **Xabar:** ${message || 'Mavjud emas'}`;
-                bot.sendMessage(ADMIN_ID, adminMsg, { parse_mode: 'Markdown' });
+                const adminMsg = `🛡️ *CYBERNOVA — YANGI MUROJAAT! №${inquiryId}*\n\n👤 *Ism:* ${name}\n📞 *Aloqa:* \`${contact}\`\n🔧 *Xizmat:* ${service || 'Ko\'rsatilmadi'}\n💬 *Izoh:* ${message || 'Mavjud emas'}`;
+                
+                bot.sendMessage(ADMIN_ID, adminMsg, { parse_mode: 'Markdown' })
+                    .catch(err => console.error("Telegram xabar yuborishda xato:", err.message));
             }
 
             res.json({ success: true, message: "Murojaatingiz muvaffaqiyatli yuborildi!" });
         }
     );
+};
+
+// Frontenddagi barcha endpoint so'rovlariga javob berish
+app.post('/api/submit-lead', handleLeadSubmission);
+app.post('/api/contact', handleLeadSubmission);
+
+// Server holatini tekshirish (Healthcheck)
+app.get('/', (req, res) => {
+    res.send("Cybernova Server Active 24/7");
 });
 
-// Serverni ishga tushirish (Render beradigan PORT ni avtomatik oladi)
+// Serverni ishga tushirish
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Cybernova Server ${PORT}-portda ishlamoqda...`);
 });
+
+// Render server uqlab qolmasligi uchun self-ping (Har 10 daqiqada bir)
+setInterval(() => {
+    https.get('https://cybernova-backend.onrender.com', (res) => {
+        console.log('Self-ping muvaffaqiyatli bajarildi.');
+    }).on('error', (err) => {
+        console.log('Self-ping xatosi:', err.message);
+    });
+}, 10 * 60 * 1000);
