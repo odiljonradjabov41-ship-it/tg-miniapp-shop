@@ -3,6 +3,7 @@ lucide.createIcons();
 const tg = window.Telegram?.WebApp;
 if (tg) {
     tg.expand();
+    tg.ready();
 }
 
 const BACKEND_URL = 'https://cybernova-backend.onrender.com';
@@ -20,7 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
 function selectService(cardElement, serviceName) {
     document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
     cardElement.classList.add('active');
-    document.getElementById('selectedService').value = serviceName;
+    
+    const selectedInput = document.getElementById('selectedService');
+    if (selectedInput) {
+        selectedInput.value = serviceName;
+    }
 }
 
 async function handleFormSubmit(event) {
@@ -28,33 +33,40 @@ async function handleFormSubmit(event) {
 
     const submitBtn = document.getElementById('submitBtn');
     const btnText = document.getElementById('btnText');
-    const name = document.getElementById('name').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const service = document.getElementById('selectedService').value;
-    const message = document.getElementById('message').value.trim();
+    
+    const nameEl = document.getElementById('name');
+    const phoneEl = document.getElementById('phone');
+    const serviceEl = document.getElementById('selectedService');
+    const messageEl = document.getElementById('message');
+
+    const name = nameEl ? nameEl.value.trim() : '';
+    const phone = phoneEl ? phoneEl.value.trim() : '';
+    const service = serviceEl ? serviceEl.value : 'Umumiy';
+    const message = messageEl ? messageEl.value.trim() : '';
 
     if (!name || !phone) {
         showToast("⚠️ Ism va telefon raqamingizni kiriting!");
         return;
     }
 
-    submitBtn.disabled = true;
-    btnText.textContent = "Yuborilmoqda...";
+    if (submitBtn) submitBtn.disabled = true;
+    if (btnText) btnText.textContent = "Yuborilmoqda...";
 
     try {
         const response = await fetch(`${BACKEND_URL}/api/submit-lead`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
             },
             body: JSON.stringify({ name, phone, service, message })
         });
 
         const data = await response.json();
 
-        if (data.success) {
+        if (response.ok && data.success) {
             showToast("✅ Arizangiz muvaffaqiyatli yuborildi!");
-            document.getElementById('message').value = '';
+            if (messageEl) messageEl.value = '';
             
             if (tg?.HapticFeedback) {
                 tg.HapticFeedback.notificationOccurred('success');
@@ -64,22 +76,26 @@ async function handleFormSubmit(event) {
                 if (tg) tg.close();
             }, 1800);
         } else {
-            showToast("❌ Xatolik yuz berdi.");
+            showToast("❌ Xatolik: " + (data.error || "Qayta urinib ko'ring"));
         }
     } catch (error) {
         console.error('Fetch xatosi:', error);
-        showToast("🌐 Server bilan aloqa yo'q!");
+        showToast("🌐 Server bilan aloqa yo'q! Bir ozdan so'ng qayta urinib ko'ring.");
     } finally {
-        submitBtn.disabled = false;
-        btnText.textContent = "Arizani Yuborish";
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnText) btnText.textContent = "Arizani Yuborish";
     }
 }
 
 function showToast(text) {
     const toast = document.getElementById('toast');
-    toast.textContent = text;
-    toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+    if (toast) {
+        toast.textContent = text;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000);
+    } else {
+        alert(text);
+    }
 }
